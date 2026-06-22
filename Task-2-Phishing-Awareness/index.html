@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Awareness Training Module</title>
+    <style>
+        :root {
+            --bg-dark: #7693d7;
+            --bg-card: #1e293b;
+            --primary: #38bdf8;
+            --accent-crimson: #ef4444;
+            --accent-green: #22c55e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Container for Slides */
+        .slide-container {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            right: 20px;
+            bottom: 40px;
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            padding: 50px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Title Slide Special Styling */
+        .title-slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: 5rem;
+            color: var(--accent-crimson);
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .sub-main-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* General Slide Typography */
+        h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--accent-crimson);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+
+        .highlight { color: var(--accent-crimson); font-weight: bold; }
+
+        /* Grid & Card Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid #334155;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card.danger { border-top: 5px solid var(--accent-crimson); }
+        .card.info { border-top: 5px solid var(--primary); }
+
+        li {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            color: #cbd5e1;
+        }
+
+        /* Quiz UI */
+        .quiz-box {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .option-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background: #334155;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+
+        .option:hover { background: #475569; }
+
+        .option.correct {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .option.wrong {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: var(--accent-crimson);
+            color: var(--accent-crimson);
+        }
+
+        /* Footer Navigation */
+        footer {
+            background-color: var(--bg-card);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #334155;
+        }
+
+        .btn {
+            background-color: var(--accent-crimson);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover:not(:disabled) { transform: scale(1.05); background: #dc2626; }
+        .btn:disabled { background: #475569; opacity: 0.5; cursor: not-allowed; }
+
+        .dots { display: flex; gap: 10px; }
+        .dot { width: 12px; height: 12px; background: #475569; border-radius: 50%; }
+        .dot.active { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 3rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .slide { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+        
+        <div class="slide active" id="slide-1">
+            <div class="title-slide-content">
+                <p class="sub-main-title">CodeAlpha Cybersecurity Awareness</p>
+                <h1 class="main-title">Phishing<br>Awareness<br>Training</h1>
+                <p style="font-size: 1.2rem; color: var(--text-muted);">Mastering the art of digital defense against social engineering.</p>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <h2>Detailed Definitions & Core Types</h2>
+            <p>To fight phishing, you must first understand the <span class="highlight">taxonomy</span> of the attack. It is not just about fake emails; it is a diverse ecosystem of deception.</p>
+            
+            <div class="grid-2">
+                <div class="card info">
+                    <h3>1. Spear Phishing</h3>
+                    <p>A highly targeted attack aimed at a specific individual or organization. Attackers research the victim (on LinkedIn/Twitter) to include personal details like your job title or boss's name.</p>
+                </div>
+                <div class="card info">
+                    <h3>2. Whaling</h3>
+                    <p>A form of spear phishing aimed at "big fish" like CEOs, CFOs, or high-level executives to steal sensitive corporate secrets or initiate huge wire transfers.</p>
+                </div>
+                <div class="card info">
+                    <h3>3. Smishing & Vishing</h3>
+                    <p><strong>Smishing</strong> is phishing via SMS (Text messages). <strong>Vishing</strong> is voice phishing (phone calls) where attackers use "deepfake" voices or urgent tones to scare victims.</p>
+                </div>
+                <div class="card info">
+                    <h3>4. Pharming</h3>
+                    <p>A technical attack that redirects a website's traffic to a fake site without the victim's knowledge by poisoning the DNS (Domain Name System).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <h2>Technical Indicators: Deep Analysis</h2>
+            <p>Attackers rely on you being in a hurry. If you pause for 10 seconds, you can spot these technical inconsistencies.</p>
+            
+            <div class="card danger">
+                <h3>🔍 URL Dissection (Typosquatting)</h3>
+                <p>Attackers register domains that look almost identical to real ones. Look for these tricks:</p>
+                <ul>
+                    <li><code>micros0ft.com</code> (Zero instead of an O)</li>
+                    <li><code>paypa1.com</code> (Number 1 instead of an L)</li>
+                    <li><code>support.apple-security.net</code> (Adding extra hyphens or changing .com to .net)</li>
+                </ul>
+            </div>
+
+            <div class="card danger">
+                <h3>📧 Header Manipulations</h3>
+                <p>Check the "From" address. A display name can say "Microsoft Support," but the actual email address might be <code>xyz123@gmail.com</code>. Legitimate companies always use their own official domain.</p>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <h2>Social Engineering Tactics</h2>
+            <p>The "Hack" doesn't happen on the computer; it happens in the victim's brain. Attackers use these psychological triggers:</p>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Urgency</h3>
+                    <p><em>"Your account will be deleted in 2 hours!"</em> By creating a ticking clock, attackers disable your critical thinking.</p>
+                </div>
+                <div class="card">
+                    <h3>Authority</h3>
+                    <p>Posing as the CEO or an IT Director. Most people are conditioned to follow orders from authority figures without questioning them.</p>
+                </div>
+                <div class="card">
+                    <h3>Fear & Intimidation</h3>
+                    <p>Threatening legal action or financial loss. Fear is the strongest human emotion used to force a "click."</p>
+                </div>
+                <div class="card">
+                    <h3>Curiosity/Greed</h3>
+                    <p><em>"Click here to see your salary bonus!"</em> or <em>"Package tracking details attached."</em> People love good news or resolving mysteries.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <h2>Prevention & Best Practices</h2>
+            <p>Becoming a "Human Firewall" requires a multi-layered defense strategy.</p>
+            
+            <div class="card info">
+                <h3>✅ Defensive Checklist</h3>
+                <ul>
+                    <li><strong>Multi-Factor Authentication (MFA):</strong> Even if they get your password, they can't get in without your physical phone code.</li>
+                    <li><strong>Hover Before You Click:</strong> On a computer, hover your mouse over a link to see the "hidden" URL in the bottom corner of your screen.</li>
+                    <li><strong>Second-Channel Verification:</strong> If your "Boss" asks for a strange favor via email, call them on the phone to confirm it was really them.</li>
+                    <li><strong>Password Managers:</strong> Use unique, 20-character passwords for every site.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <h2>Knowledge Assessment (Quiz)</h2>
+            <p>Select the best response for each scenario. Aim for 5/5!</p>
+
+            <div class="quiz-box">
+                <p class="quiz-question">1. An email from "IT" says your password expires in 10 minutes and gives a link. What do you do?</p>
+                <div class="option-list">
+                    <div class="option" onclick="ans(this, false)">A) Click and change it quickly.</div>
+                    <div class="option" onclick="ans(this, true)">B) Ignore it and go to the official portal manually.</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <p class="quiz-question">2. What is "Smishing"?</p>
+                <div class="option-list">
+                    <div class="option" onclick="ans(this, false)">A) Phishing via Voice Call.</div>
+                    <div class="option" onclick="ans(this, true)">B) Phishing via SMS/Text Message.</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <p class="quiz-question">3. You see a link to "vvvv.g00gle.com". Is this safe?</p>
+                <div class="option-list">
+                    <div class="option" onclick="ans(this, false)">A) Yes, it looks like Google.</div>
+                    <div class="option" onclick="ans(this, true)">B) No, it uses zeros instead of O's (Typosquatting).</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <p class="quiz-question">4. Which of these is the BEST defense against stolen passwords?</p>
+                <div class="option-list">
+                    <div class="option" onclick="ans(this, true)">A) Multi-Factor Authentication (MFA).</div>
+                    <div class="option" onclick="ans(this, false)">B) Changing your password every 10 days.</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <p class="quiz-question">5. Your "CEO" emails you from a personal Gmail asking for gift cards. What is this?</p>
+                <div class="option-list">
+                    <div class="option" onclick="ans(this, true)">A) A Social Engineering attack.</div>
+                    <div class="option" onclick="ans(this, false)">B) A normal urgent request.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <button class="btn" id="prev" onclick="move(-1)" disabled>Previous</button>
+        <div class="dots" id="dots"></div>
+        <button class="btn" id="next" onclick="move(1)">Next</button>
+    </footer>
+
+    <script>
+        let cur = 1;
+        const total = 6;
+
+        // Init Dots
+        const dotBox = document.getElementById('dots');
+        for(let i=1; i<=total; i++) {
+            const d = document.createElement('div');
+            d.className = 'dot' + (i===1?' active':'');
+            d.id = 'd'+i;
+            dotBox.appendChild(d);
+        }
+
+        function move(dir) {
+            document.getElementById('slide-'+cur).classList.remove('active');
+            document.getElementById('d'+cur).classList.remove('active');
+            cur += dir;
+            document.getElementById('slide-'+cur).classList.add('active');
+            document.getElementById('d'+cur).classList.add('active');
+
+            document.getElementById('prev').disabled = cur === 1;
+            document.getElementById('next').disabled = cur === total;
+        }
+
+        function ans(el, isCorrect) {
+            // Find parent list to clear other options in this specific question
+            const parent = el.parentElement;
+            parent.querySelectorAll('.option').forEach(o => o.classList.remove('correct', 'wrong'));
+            
+            if(isCorrect) el.classList.add('correct');
+            else el.classList.add('wrong');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'ArrowRight' && cur < total) move(1);
+            if(e.key === 'ArrowLeft' && cur > 1) move(-1);
+        });
+    </script>
+</body>
+</html>
