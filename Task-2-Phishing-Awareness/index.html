@@ -36,20 +36,20 @@
             flex: 1;
             position: relative;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
 
         .slide {
             position: absolute;
-            top: 40px;
+            top: 30px;
             left: 20px;
             right: 20px;
-            bottom: 40px;
+            bottom: 30px;
             background-color: var(--bg-card);
             border-radius: 16px;
-            padding: 50px;
+            padding: 55px;
             opacity: 0;
             visibility: hidden;
             transition: all 0.5s ease;
@@ -76,44 +76,45 @@
         }
 
         .main-title {
-            font-size: 5rem;
+            font-size: 5.5rem;
             color: var(--accent-crimson);
             text-transform: uppercase;
             font-weight: 800;
             letter-spacing: -2px;
-            line-height: 0.9;
-            margin-bottom: 20px;
+            line-height: 0.95;
+            margin-bottom: 25px;
             text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
         }
 
         .sub-main-title {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             color: var(--primary);
-            font-weight: 400;
+            font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
-        /* General Slide Typography */
+        /* General Slide Typography - Scaled Up for Readability */
         h2 {
             color: var(--primary);
-            font-size: 2.2rem;
-            margin-bottom: 25px;
+            font-size: 2.6rem;
+            margin-bottom: 30px;
             border-bottom: 3px solid var(--accent-crimson);
             display: inline-block;
-            padding-bottom: 5px;
+            padding-bottom: 8px;
         }
 
         h3 {
             color: var(--primary);
-            margin-bottom: 12px;
-            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-size: 1.65rem;
         }
 
         p {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
+            font-size: 1.35rem;
+            line-height: 1.75;
+            margin-bottom: 25px;
             color: #e2e8f0;
         }
 
@@ -123,54 +124,134 @@
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 30px;
         }
 
         .card {
             background: rgba(15, 23, 42, 0.5);
             border: 1px solid #334155;
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
             margin-bottom: 20px;
+            transition: transform 0.2s, border-color 0.2s;
         }
 
         .card.danger { border-top: 5px solid var(--accent-crimson); }
         .card.info { border-top: 5px solid var(--primary); }
+        .card.success { border-top: 5px solid var(--accent-green); }
+
+        /* Interactive Card Overrides */
+        .card.interactive-phish {
+            cursor: pointer;
+            border: 2px solid #334155;
+        }
+        .card.interactive-phish:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        .card.interactive-phish.selected-wrong {
+            border-color: var(--accent-crimson);
+            background: rgba(239, 68, 68, 0.05);
+        }
+        .card.interactive-phish.selected-correct {
+            border-color: var(--accent-green);
+            background: rgba(34, 197, 94, 0.05);
+        }
 
         li {
-            margin-left: 20px;
-            margin-bottom: 10px;
-            font-size: 1.05rem;
+            margin-left: 25px;
+            margin-bottom: 15px;
+            font-size: 1.25rem;
             color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Sandbox Interactive Element */
+        .sandbox-email {
+            background: #0f172a;
+            border: 2px dashed #475569;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 15px;
+            position: relative;
+        }
+        .sandbox-header {
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-family: monospace;
+            font-size: 1.15rem;
+        }
+        .sandbox-trigger {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 2px solid var(--primary);
+            transition: 0.2s;
+        }
+        .sandbox-trigger:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+        .sandbox-trigger.revealed {
+            background: rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+            border: 1px solid var(--accent-crimson);
+        }
+        .sandbox-alert {
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--accent-crimson);
+            padding: 10px 15px;
+            margin-top: 15px;
+            font-size: 1.15rem;
+            color: #fca5a5;
+        }
+
+        /* Real-time Browser Mock Status Bar */
+        .browser-status-bar {
+            background: #020617;
+            padding: 8px 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #64748b;
+            border: 1px solid #1e293b;
+        }
+        .status-link {
+            color: #e2e8f0;
+            font-weight: bold;
         }
 
         /* Quiz UI */
         .quiz-box {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             border-bottom: 1px solid #334155;
-            padding-bottom: 20px;
+            padding-bottom: 25px;
         }
 
         .quiz-question {
             font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
             color: var(--text-main);
         }
 
         .option-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .option {
             background: #334155;
-            padding: 12px 20px;
+            padding: 15px 25px;
             border-radius: 8px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: 0.2s;
+            font-size: 1.2rem;
         }
 
         .option:hover { background: #475569; }
@@ -179,18 +260,20 @@
             background: rgba(34, 197, 94, 0.15);
             border-color: var(--accent-green);
             color: var(--accent-green);
+            font-weight: bold;
         }
 
         .option.wrong {
             background: rgba(239, 68, 68, 0.15);
             border-color: var(--accent-crimson);
             color: var(--accent-crimson);
+            font-weight: bold;
         }
 
         /* Footer Navigation */
         footer {
             background-color: var(--bg-card);
-            padding: 20px 50px;
+            padding: 25px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -200,26 +283,26 @@
         .btn {
             background-color: var(--accent-crimson);
             color: white;
-            padding: 12px 30px;
+            padding: 15px 35px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: transform 0.2s;
         }
 
         .btn:hover:not(:disabled) { transform: scale(1.05); background: #dc2626; }
         .btn:disabled { background: #475569; opacity: 0.5; cursor: not-allowed; }
 
-        .dots { display: flex; gap: 10px; }
-        .dot { width: 12px; height: 12px; background: #475569; border-radius: 50%; }
+        .dots { display: flex; gap: 12px; }
+        .dot { width: 14px; height: 14px; background: #475569; border-radius: 50%; }
         .dot.active { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
 
         @media (max-width: 768px) {
-            .main-title { font-size: 3rem; }
+            .main-title { font-size: 3.5rem; }
             .grid-2 { grid-template-columns: 1fr; }
-            .slide { padding: 30px; }
+            .slide { padding: 35px; }
         }
     </style>
 </head>
@@ -231,7 +314,7 @@
             <div class="title-slide-content">
                 <p class="sub-main-title">CodeAlpha Cybersecurity Awareness</p>
                 <h1 class="main-title">Phishing<br>Awareness<br>Training</h1>
-                <p style="font-size: 1.2rem; color: var(--text-muted);">Mastering the art of digital defense against social engineering.</p>
+                <p style="font-size: 1.4rem; color: var(--text-muted);">Mastering the art of digital defense against social engineering.</p>
             </div>
         </div>
 
@@ -242,25 +325,25 @@
             <div class="grid-2">
                 <div class="card info">
                     <h3>1. Spear Phishing</h3>
-                    <p>A highly targeted attack aimed at a specific individual or organization. Attackers research the victim (on LinkedIn/Twitter) to include personal details like your job title or boss's name.</p>
+                    <p>A highly targeted attack aimed at a specific individual or organization. Attackers research the victim on professional networks to include custom tailored details.</p>
                 </div>
                 <div class="card info">
                     <h3>2. Whaling</h3>
-                    <p>A form of spear phishing aimed at "big fish" like CEOs, CFOs, or high-level executives to steal sensitive corporate secrets or initiate huge wire transfers.</p>
+                    <p>A form of spear phishing aimed at high-profile targets like CEOs and CFOs to authorize fraudulent financial operations or yield sensitive trade secrets.</p>
                 </div>
                 <div class="card info">
                     <h3>3. Smishing & Vishing</h3>
-                    <p><strong>Smishing</strong> is phishing via SMS (Text messages). <strong>Vishing</strong> is voice phishing (phone calls) where attackers use "deepfake" voices or urgent tones to scare victims.</p>
+                    <p><strong>Smishing</strong> uses SMS text channels to deliver malicious links. <strong>Vishing</strong> relies on telephone calls, often manipulating caller ID info or voice syntax.</p>
                 </div>
                 <div class="card info">
                     <h3>4. Pharming</h3>
-                    <p>A technical attack that redirects a website's traffic to a fake site without the victim's knowledge by poisoning the DNS (Domain Name System).</p>
+                    <p>A technical manipulation that hijacks DNS records or system configurations, redirecting victims to rogue domains even if the correct address was typed.</p>
                 </div>
             </div>
         </div>
 
         <div class="slide" id="slide-3">
-            <h2>Technical Indicators: Deep Analysis</h2>
+            <h2>Technical Indicators</h2>
             <p>Attackers rely on you being in a hurry. If you pause for 10 seconds, you can spot these technical inconsistencies.</p>
             
             <div class="card danger">
@@ -269,56 +352,120 @@
                 <ul>
                     <li><code>micros0ft.com</code> (Zero instead of an O)</li>
                     <li><code>paypa1.com</code> (Number 1 instead of an L)</li>
-                    <li><code>support.apple-security.net</code> (Adding extra hyphens or changing .com to .net)</li>
+                    <li><code>support.apple-security.net</code> (Adding extra hyphens or changing suffixes)</li>
                 </ul>
             </div>
 
             <div class="card danger">
                 <h3>📧 Header Manipulations</h3>
-                <p>Check the "From" address. A display name can say "Microsoft Support," but the actual email address might be <code>xyz123@gmail.com</code>. Legitimate companies always use their own official domain.</p>
+                <p>Check the "From" address. A display name can say "Corporate IT," but the actual tracking sender address might point to a generic external utility provider domain.</p>
             </div>
         </div>
 
         <div class="slide" id="slide-4">
+            <h2>Threat & Hover Inspection</h2>
+            <p>Hover over the links or click the marked areas to expose malicious destination routing frameworks before running into traps:</p>
+            
+            <div class="sandbox-email">
+                <div class="sandbox-header">
+                    <strong>From:</strong> Secure Support Operations &lt;<span class="sandbox-trigger" onmouseover="updateStatusBar('http://secure-update.verification-paypa1.net/login')" onmouseout="clearStatusBar()" onclick="revealTrap(this, 'alert-1')">admin-portal@paypa1-security.com</span>&gt;<br>
+                    <strong>Subject:</strong> Immediate Account Security Action Required
+                </div>
+                <p>Dear Valued Client,</p>
+                <p>We detected access irregularities from an unknown routing terminal. To secure your configuration boundaries, please execute account verification processing inside your <span class="sandbox-trigger" onmouseover="updateStatusBar('http://deceptive-mirror-anchor.com/login-capture')" onmouseout="clearStatusBar()" onclick="revealTrap(this, 'alert-2')">Secure Banking Server Link</span> immediately.</p>
+                
+                <div class="browser-status-bar" id="browser-status">
+                    🔗 Browser Status Bar Link Preview: <span class="status-link" id="status-link-text">None (Hover over a link above)</span>
+                </div>
+            </div>
+
+            <div id="alert-1" class="sandbox-alert">
+                <strong>🚨 Spoofed Header Detected:</strong> Notice the domain utilizes typosquatting ("paypa1" with a number 1). Official banking alerts come strictly from root organization web infrastructures.
+            </div>
+            <div id="alert-2" class="sandbox-alert">
+                <strong>🚨 Malicious Redirect Pointer:</strong> Hovering reveals this routing mechanism bypasses standard internal security architectures, redirecting instead to an unverified storage vector.
+            </div>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <h2>Real-World Cases: Spot the Phish!</h2>
+            <p>Click on the card below that displays clear indicators of a malicious social engineering scheme:</p>
+            
+            <div class="grid-2">
+                <div class="card interactive-phish" id="case-legit" onclick="playGame(this, false)">
+                    <h3>Scenario Alpha: Internal System Update</h3>
+                    <p><strong>From:</strong> security@corporate-root.com<br><strong>Subject:</strong> Routine MFA System Check</p>
+                    <p><em>"Team, this is a reminder to complete your standard monthly Multi-Factor authentication updates via the internal enterprise dashboard portal."</em></p>
+                </div>
+                
+                <div class="card interactive-phish" id="case-phish" onclick="playGame(this, true)">
+                    <h3>Scenario Beta: Urgent Financial KYC</h3>
+                    <p><strong>From:</strong> hdfc-update-alert@kyc-verification-server3.net<br><strong>Subject:</strong> CRITICAL: Block Notification</p>
+                    <p><em>"Dear Customer, your HDFC netbanking access is suspended due to missing KYC records. Click here to confirm identity profiles immediately: secure-hdfc-kyc.com"</em></p>
+                </div>
+            </div>
+
+            <div class="card success" id="game-feedback" style="display: none; margin-top: 20px;">
+                <h3 id="game-title">Result</h3>
+                <p id="game-text"></p>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-6">
             <h2>Social Engineering Tactics</h2>
             <p>The "Hack" doesn't happen on the computer; it happens in the victim's brain. Attackers use these psychological triggers:</p>
             
             <div class="grid-2">
                 <div class="card">
                     <h3>Urgency</h3>
-                    <p><em>"Your account will be deleted in 2 hours!"</em> By creating a ticking clock, attackers disable your critical thinking.</p>
+                    <p>By creating a strict, short timeline, attackers compromise rational thought processes, pressuring targets to take shortcuts.</p>
                 </div>
                 <div class="card">
                     <h3>Authority</h3>
-                    <p>Posing as the CEO or an IT Director. Most people are conditioned to follow orders from authority figures without questioning them.</p>
+                    <p>Impersonating executive profiles or legal agencies to take advantage of natural tendencies to comply with operational hierarchies.</p>
                 </div>
                 <div class="card">
                     <h3>Fear & Intimidation</h3>
-                    <p>Threatening legal action or financial loss. Fear is the strongest human emotion used to force a "click."</p>
+                    <p>Threatening direct loss of system functionality, monetary adjustments, or professional exposure to force structural compliance.</p>
                 </div>
                 <div class="card">
-                    <h3>Curiosity/Greed</h3>
-                    <p><em>"Click here to see your salary bonus!"</em> or <em>"Package tracking details attached."</em> People love good news or resolving mysteries.</p>
+                    <h3>Curiosity / Greed</h3>
+                    <p>Dangling unexpected incentives, corporate bonuses, or tracking confirmations to trigger impulsive link exploration behavior.</p>
                 </div>
             </div>
         </div>
 
-        <div class="slide" id="slide-5">
+        <div class="slide" id="slide-7">
             <h2>Prevention & Best Practices</h2>
             <p>Becoming a "Human Firewall" requires a multi-layered defense strategy.</p>
             
             <div class="card info">
                 <h3>✅ Defensive Checklist</h3>
                 <ul>
-                    <li><strong>Multi-Factor Authentication (MFA):</strong> Even if they get your password, they can't get in without your physical phone code.</li>
-                    <li><strong>Hover Before You Click:</strong> On a computer, hover your mouse over a link to see the "hidden" URL in the bottom corner of your screen.</li>
-                    <li><strong>Second-Channel Verification:</strong> If your "Boss" asks for a strange favor via email, call them on the phone to confirm it was really them.</li>
-                    <li><strong>Password Managers:</strong> Use unique, 20-character passwords for every site.</li>
+                    <li><strong>Multi-Factor Authentication (MFA):</strong> Prevents unauthorized credential use even if static passwords become exposed.</li>
+                    <li><strong>Hover Verification Rules:</strong> Always preview underlying targets before establishing active digital connections.</li>
+                    <li><strong>Secondary Verification Channels:</strong> Validate anomalous out-of-band operational requests through distinct secondary communication lines.</li>
+                    <li><strong>Password Vault Infrastructures:</strong> Implement complex, distinct account boundaries across corporate environments.</li>
                 </ul>
             </div>
         </div>
 
-        <div class="slide" id="slide-6">
+        <div class="slide" id="slide-8">
+            <h2>Reporting Phishing</h2>
+            <p>Defensive responses matter. If you suspect an anomaly or identify an incoming threat vector, execute the following operational sequence:</p>
+            
+            <div class="card success">
+                <h3>🛡️ Incident Protocol Response</h3>
+                <ul>
+                    <li><strong>Don't click links:</strong> Bypasses initial attack executions entirely.</li>
+                    <li><strong>Don't download attachments:</strong> Prevents unauthorized endpoint code executions or payload drops.</li>
+                    <li><strong>Report to IT / Security Team:</strong> Forwards metadata footprints so security teams can insulate corporate perimeter firewalls.</li>
+                    <li><strong>Delete the email:</strong> Clears threat vectors out of your active workspace environment.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-9">
             <h2>Knowledge Assessment (Quiz)</h2>
             <p>Select the best response for each scenario. Aim for 5/5!</p>
 
@@ -373,7 +520,7 @@
 
     <script>
         let cur = 1;
-        const total = 6;
+        const total = 9;
 
         // Init Dots
         const dotBox = document.getElementById('dots');
@@ -396,12 +543,51 @@
         }
 
         function ans(el, isCorrect) {
-            // Find parent list to clear other options in this specific question
             const parent = el.parentElement;
             parent.querySelectorAll('.option').forEach(o => o.classList.remove('correct', 'wrong'));
             
             if(isCorrect) el.classList.add('correct');
             else el.classList.add('wrong');
+        }
+
+        // Logic for Idea 1: Hover-to-Reveal Status Bar
+        function updateStatusBar(urlText) {
+            document.getElementById('status-link-text').innerText = urlText;
+            document.getElementById('status-link-text').style.color = '#ef4444';
+        }
+
+        function clearStatusBar() {
+            document.getElementById('status-link-text').innerText = "None (Hover over a link above)";
+            document.getElementById('status-link-text').style.color = '#64748b';
+        }
+
+        function revealTrap(el, alertId) {
+            el.classList.add('revealed');
+            document.getElementById(alertId).style.display = 'block';
+        }
+
+        // Logic for Idea 2: Spot the Phish Game
+        function playGame(cardElement, isPhish) {
+            document.getElementById('case-legit').classList.remove('selected-correct', 'selected-wrong');
+            document.getElementById('case-phish').classList.remove('selected-correct', 'selected-wrong');
+            
+            const feedbackBox = document.getElementById('game-feedback');
+            const title = document.getElementById('game-title');
+            const txt = document.getElementById('game-text');
+            
+            feedbackBox.style.display = 'block';
+
+            if(isPhish) {
+                cardElement.classList.add('selected-correct');
+                feedbackBox.className = "card success";
+                title.innerText = "🎯 Outstanding Detection! (Correct Answer)";
+                txt.innerHTML = "Scenario Beta is a classic high-risk threat vector. It contains distinct technical indicators: **unverified sender domain name patterns**, **aggressive call-to-action urgency markers**, and an **unofficial landing page landing directory** target link tracking reference.";
+            } else {
+                cardElement.classList.add('selected-wrong');
+                feedbackBox.className = "card danger";
+                title.innerText = "❌ Incorrect Identification";
+                txt.innerHTML = "Scenario Alpha represents standard internal corporate operations. The sender domain matches root organization boundaries perfectly, parameters contain clear informational timelines, and it lacks deceptive URL links.";
+            }
         }
 
         document.addEventListener('keydown', (e) => {
